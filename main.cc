@@ -58,7 +58,7 @@ int main() {
     for (int i = 0; i < 4; i++) d[i] = line[i] - '0';
     std::cout << "Read: ";
     for (int i = 0; i < 4; i++) std::cout << d[i] << " ";
-    std::cout << std::end << std::end;
+    std::cout << std::endl << std::endl;
     isValidScan(sBoard);
     sBoard.movePiece(d[0], d[1], d[2], d[3]);
     std::cout << std::endl << sBoard.displayBoard().str();
