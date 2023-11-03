@@ -27,3 +27,13 @@ void underThreatScan(Student::ChessBoard sBoard) {
         }
     }
 }
+
+bool ChessBoard::sideChecked(Color color) {
+    for (int r = 0; r < this -> numRows; r++) {
+        for (int c = 0; c < numCols; c++) {
+            ChessPiece * piece = board.at(r).at(c);
+            if (piece && piece -> getColor() == color && piece -> getType() == King && isPieceUnderThreat(r, c)) return true;
+        }
+    }
+    return false;
+}
