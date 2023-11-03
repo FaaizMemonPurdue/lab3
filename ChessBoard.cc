@@ -1,3 +1,4 @@
+//#include <iostream>
 #include "BishopPiece.hh"
 #include "ChessBoard.hh"
 #include "KingPiece.hh"
@@ -32,7 +33,7 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 }
 
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
-  if (!(fromRow >= 0 && fromRow < numRows && fromColumn >= 0 && fromColumn < numCols && board.at(fromRow).at(fromColumn) && board.at(fromRow).at(fromColumn)->canMoveToLocation(toRow, toColumn))) return false;
+  if (!(fromRow >= 0 && fromRow < numRows && fromColumn >= 0 && fromColumn < numCols && board.at(fromRow).at(fromColumn)&& board.at(fromRow).at(fromColumn)->canMoveToLocation(toRow, toColumn))) return false;
   ChessPiece *temp = board.at(toRow).at(toColumn);
   board.at(toRow).at(toColumn) = board.at(fromRow).at(fromColumn);
   board.at(toRow).at(toColumn)->setPosition(toRow, toColumn);
@@ -41,7 +42,9 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
   bool ret = true;
   for (int r = 0; r < this -> numRows; r++) for (int c = 0; c < numCols; c++) {
     ChessPiece * piece = board.at(r).at(c);
-    if (piece && piece -> getColor() == turn && piece -> getType() == King && isPieceUnderThreat(r, c)) return false;
+    if (piece && piece->getType() == King && piece->getColor() == board.at(toRow).at(toColumn) -> getColor() && isPieceUnderThreat(r, c)) {
+        ret = false;
+    }
   }
 
   board.at(fromRow).at(fromColumn) = board.at(toRow).at(toColumn);
@@ -51,7 +54,14 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 }
 
 bool ChessBoard::isPieceUnderThreat(int row, int column) {
-  if (board.at(row).at(column)) for (int x = 0; x < numRows; x++) for (int y = 0; y < numCols; y++) if (board.at(x).at(y)->canMoveToLocation(row, column)) return true;
+  if (board.at(row).at(column)) {
+      for (int x = 0; x < numRows; x++) {
+          for (int y = 0; y < numCols; y++) {
+              if (board.at(x).at(y) && board.at(x).at(y)->canMoveToLocation(row, column))
+                  return true;
+          }
+      }
+  }
   return false;
 }
 
