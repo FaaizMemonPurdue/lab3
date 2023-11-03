@@ -23,10 +23,12 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
   if (!isValidMove(fromRow, fromColumn, toRow, toColumn) || turn != board.at(fromRow).at(fromColumn)->getColor()) return false;
+  
   ChessPiece *temp = board.at(toRow).at(toColumn);
   board.at(toRow).at(toColumn) = board.at(fromRow).at(fromColumn);
   board.at(toRow).at(toColumn)->setPosition(toRow, toColumn);
   board.at(fromRow).at(fromColumn) = nullptr;
+
   if (board.at(toRow).at(toColumn)->getType() == King && isPieceUnderThreat(toRow, toColumn)) {
     board.at(fromRow).at(fromColumn) = board.at(toRow).at(toColumn);
     board.at(fromRow).at(fromColumn)->setPosition(fromRow, fromColumn);

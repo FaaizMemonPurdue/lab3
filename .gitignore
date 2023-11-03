@@ -106,3 +106,5 @@ test_files/part3_8x8_16.txt
 test_files/part3_8x8_17.txt
 test_files/part3_8x8_18.txt
 test_files/part3_8x8_19.txt
+chess
+.vscode/settings.json
