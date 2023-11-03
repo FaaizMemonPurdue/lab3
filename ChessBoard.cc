@@ -38,7 +38,6 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
   board.at(toRow).at(toColumn) = board.at(fromRow).at(fromColumn);
   board.at(toRow).at(toColumn)->setPosition(toRow, toColumn);
   board.at(fromRow).at(fromColumn) = nullptr;
-
   bool ret = true;
   for (int r = 0; r < this -> numRows; r++) for (int c = 0; c < numCols; c++) {
     ChessPiece * piece = board.at(r).at(c);
