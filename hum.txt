@@ -1,0 +1,29 @@
+void isValidScan(Student::ChessBoard sBoard) {
+    for (int i = 0; i < sBoard.getNumRows(); i++) {
+        for (int j = 0; j < sBoard.getNumCols(); j++) {
+            Student::ChessPiece * piece = sBoard.getPiece(i, j);
+            if (piece != nullptr) {
+                for (int k = 0; k < sBoard.getNumRows(); k++) {
+                    for (int l = 0; l < sBoard.getNumCols(); l++) {
+                        if (sBoard.isValidMove(i, j, k, l)) {
+                            std::cout << "Valid move from (" << i << ", " << j << ") to (" << k << ", " << l << ")" << std::endl;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+void underThreatScan(Student::ChessBoard sBoard) {
+    for (int i = 0; i < sBoard.getNumRows(); i++) {
+        for (int j = 0; j < sBoard.getNumCols(); j++) {
+            Student::ChessPiece * piece = sBoard.getPiece(i, j);
+            if (piece != nullptr) {
+                if (sBoard.isPieceUnderThreat(i, j)) {
+                    std::cout << "Piece at (" << i << ", " << j << ") is under threat" << std::endl;
+                }
+            }
+        }
+    }
+}
